@@ -15,7 +15,8 @@ import com.mojoauth.android.handler.MojoAuthRequest;
 import com.mojoauth.android.helper.ErrorResponse;
 import com.mojoauth.android.helper.MojoAuthSDK;
 import com.mojoauth.android.helper.MojoAuthValidator;
-import com.mojoauth.android.models.responsemodels.EmailResponse;
+import com.mojoauth.android.models.responsemodels.JwksResponse;
+import com.mojoauth.android.models.responsemodels.LoginResponse;
 import com.mojoauth.android.models.responsemodels.UserResponse;
 import com.mojoauth.android.models.responsemodels.VerifyTokenResponse;
 
@@ -38,7 +39,7 @@ public class MojoAuthApi {
      * @param email The email
      * @param handler The handler
      */
-    public void loginByMagicLink(String email, final AsyncHandler<EmailResponse> handler) {
+    public void loginByMagicLink(String email, final AsyncHandler<LoginResponse> handler) {
 
         Map<String, String> queryParameters = new HashMap<String, String>();
         JsonObject bodyParameters = new JsonObject(); //Required
@@ -53,9 +54,9 @@ public class MojoAuthApi {
 
             @Override
             public void onSuccess(String response) {
-                TypeToken<EmailResponse> typeToken = new TypeToken<EmailResponse>() {
+                TypeToken<LoginResponse> typeToken = new TypeToken<LoginResponse>() {
                 };
-                EmailResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
+                LoginResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
                 handler.onSuccess(successResponse);
             }
 
@@ -70,7 +71,7 @@ public class MojoAuthApi {
      * @param email The email
      * @param handler The handler
      */
-    public void loginByEmailOTP(String email, final AsyncHandler<EmailResponse> handler) {
+    public void loginByEmailOTP(String email, final AsyncHandler<LoginResponse> handler) {
 
         Map<String, String> queryParameters = new HashMap<String, String>();
         JsonObject bodyParameters = new JsonObject(); //Required
@@ -85,9 +86,9 @@ public class MojoAuthApi {
 
             @Override
             public void onSuccess(String response) {
-                TypeToken<EmailResponse> typeToken = new TypeToken<EmailResponse>() {
+                TypeToken<LoginResponse> typeToken = new TypeToken<LoginResponse>() {
                 };
-                EmailResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
+                LoginResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
                 handler.onSuccess(successResponse);
             }
 
@@ -101,19 +102,26 @@ public class MojoAuthApi {
     /**
      *
      * @param otp The otp
+     * @param stateId The id
      * @param handler the handler
      */
-    public void verifyEmailOTP(String otp, final AsyncHandler<UserResponse> handler) {
+    public void verifyEmailOTP(String otp,String stateId,final AsyncHandler<UserResponse> handler) {
 
         Map<String, String> queryParameters = new HashMap<String, String>();
+        JsonObject bodyParameters = new JsonObject(); //Required
         String resourcePath = "users/emailotp/verify";
 
         if (!MojoAuthValidator.isNullOrWhiteSpace(otp)) {
 
-            queryParameters.put("otp", otp);
+            bodyParameters.addProperty("otp", otp);
         }
 
-        MojoAuthRequest.execute("GET", resourcePath, queryParameters,null, new AsyncHandler<String>() {
+        if (!MojoAuthValidator.isNullOrWhiteSpace(stateId)) {
+
+            bodyParameters.addProperty("state_id", stateId);
+        }
+
+        MojoAuthRequest.execute("POST", resourcePath, queryParameters, gson.toJson(bodyParameters), new AsyncHandler<String>() {
 
             @Override
             public void onSuccess(String response) {
@@ -132,17 +140,17 @@ public class MojoAuthApi {
 
     /**
      *
-     * @param guid The id
+     * @param stateId The id
      * @param handler The handler
      */
-    public void pingStatus(String guid, final AsyncHandler<UserResponse> handler) {
+    public void pingStatus(String stateId, final AsyncHandler<UserResponse> handler) {
 
         Map<String, String> queryParameters = new HashMap<String, String>();
         String resourcePath = "users/status";
 
-        if (!MojoAuthValidator.isNullOrWhiteSpace(guid)) {
+        if (!MojoAuthValidator.isNullOrWhiteSpace(stateId)) {
 
-            queryParameters.put("guid", guid);
+            queryParameters.put("state_id", stateId);
         }
 
         MojoAuthRequest.execute("GET", resourcePath, queryParameters,null, new AsyncHandler<String>() {
@@ -165,26 +173,21 @@ public class MojoAuthApi {
 
     /**
      *
-     * @param accessToken The accessToken
      * @param handler The handler
      */
-    public void verifyAccessToken(String accessToken, final AsyncHandler<VerifyTokenResponse> handler) {
+    public void getJWKS(final AsyncHandler<JwksResponse> handler) {
 
         Map<String, String> queryParameters = new HashMap<String, String>();
-        String resourcePath = "token/verify";
+        String resourcePath = "token/jwks";
 
-        if (!MojoAuthValidator.isNullOrWhiteSpace(accessToken)) {
-
-            queryParameters.put("access_token", accessToken);
-        }
 
         MojoAuthRequest.execute("GET", resourcePath, queryParameters,null, new AsyncHandler<String>() {
 
             @Override
             public void onSuccess(String response) {
-                TypeToken<VerifyTokenResponse> typeToken = new TypeToken<VerifyTokenResponse>() {
+                TypeToken<JwksResponse> typeToken = new TypeToken<JwksResponse>() {
                 };
-                VerifyTokenResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
+                JwksResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
                 handler.onSuccess(successResponse);
             }
 

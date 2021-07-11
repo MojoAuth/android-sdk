@@ -1,7 +1,7 @@
 /* 
  * 
  * Created by MojoAuth Development Team
-   Copyright 2020 MojoAuth Inc. All rights reserved.
+   Copyright 2020 LoginRadius Inc. All rights reserved.
    
  */
 package com.mojoauth.android.models.responsemodels;
@@ -12,36 +12,23 @@ import com.google.gson.annotations.SerializedName;
 // <summary>
 //	Response containing Definition of Complete Profile data
 // </summary>
-public class Data {
+public class User {
 
-@SerializedName("access_token")
-@Expose
-private String accessToken;
-@SerializedName("email")
-@Expose
-private String email;
 @SerializedName("created_at")
 @Expose
 private String createdAt;
 @SerializedName("updated_at")
 @Expose
 private String updatedAt;
-
-public String getAccessToken() {
-return accessToken;
-}
-
-public void setAccessToken(String accessToken) {
-this.accessToken = accessToken;
-}
-
-public String getEmail() {
-return email;
-}
-
-public void setEmail(String email) {
-this.email = email;
-}
+@SerializedName("issuer")
+@Expose
+private String issuer;
+@SerializedName("user_id")
+@Expose
+private String userId;
+@SerializedName("identifier")
+@Expose
+private String identifier;
 
 public String getCreatedAt() {
 return createdAt;
@@ -57,6 +44,30 @@ return updatedAt;
 
 public void setUpdatedAt(String updatedAt) {
 this.updatedAt = updatedAt;
+}
+
+public String getIssuer() {
+return issuer;
+}
+
+public void setIssuer(String issuer) {
+this.issuer = issuer;
+}
+
+public String getUserId() {
+return userId;
+}
+
+public void setUserId(String userId) {
+this.userId = userId;
+}
+
+public String getIdentifier() {
+return identifier;
+}
+
+public void setIdentifier(String identifier) {
+this.identifier = identifier;
 }
 
 }

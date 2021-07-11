@@ -7,13 +7,22 @@ import java.util.TreeMap;
 public class MojoAuthSDK {
 
     private static String MOJOAUTH_API_ROOT = "https://api.mojoauth.com";
-    private MojoAuthSDK() {}
+    private MojoAuthSDK() {
+
+
+    }
 
     public static class Initialize{
-        private static String apiKey,domain;
+        private static String apiKey,domain,modulus,exponent;
 
-        public void setApiKey(String apiKey) {
+        public static void setApiKey(String apiKey) {
             Initialize.apiKey = apiKey;
+        }
+        public static void setModulus(String modulus) {
+            Initialize.modulus = modulus;
+        }
+        public static void setExponent(String exponent) {
+            Initialize.exponent = exponent;
         }
 
 
@@ -21,16 +30,26 @@ public class MojoAuthSDK {
     }
 
     public static boolean validate(){
-        if(Initialize.apiKey == null || Initialize.apiKey.length() == 0){
-            return false;
-        }else return true;
+        return Initialize.apiKey != null && Initialize.apiKey.length() != 0;
     }
+
+    public static boolean validateJwk() {
+        return Initialize.exponent != null && Initialize.exponent.length() != 0 && Initialize.modulus != null
+                && Initialize.modulus.length() != 0;
+    }
+
 
     public static String getApiKey() {
         return Initialize.apiKey;
     }
 
+    public static String getModulus() {
+        return Initialize.modulus;
+    }
 
+    public static String getExponent() {
+        return Initialize.exponent;
+    }
 
     public static String getApiDomain() {
         if(Initialize.domain!=null && Initialize.domain.length() > 0){
@@ -60,7 +79,7 @@ public class MojoAuthSDK {
     }
 
 
-    public static String createKeyValueString(Map<String, String> queryArgs) {
+    private static String createKeyValueString(Map<String, String> queryArgs) {
         if (queryArgs != null) {
             String[] sb = new String[queryArgs.size()];
             int i = 0;
@@ -74,7 +93,7 @@ public class MojoAuthSDK {
     }
 
 
-    public static String combine(String[] s, String glue) {
+    private static String combine(String[] s, String glue) {
         int k = s.length;
         if (k == 0)
             return null;
