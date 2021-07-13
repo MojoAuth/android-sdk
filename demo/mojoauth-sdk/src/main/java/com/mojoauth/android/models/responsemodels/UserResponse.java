@@ -1,7 +1,7 @@
 /* 
  * 
- * Created by MojoAuth Development Team
-   Copyright 2020 MojoAuth Inc. All rights reserved.
+ * Created by LoginRadius Development Team
+   Copyright 2019 LoginRadius Inc. All rights reserved.
    
  */
 
@@ -15,27 +15,39 @@ import com.google.gson.annotations.SerializedName;
 // </summary>
 public class UserResponse {
 
-	@SerializedName("status")
+	@SerializedName("authenticated")
 	@Expose
-	private Boolean status;
-	@SerializedName("data")
+	private Boolean authenticated;
+	@SerializedName("oauth")
 	@Expose
-	private Data data;
+	private Oauth oauth;
+	@SerializedName("user")
+	@Expose
+	private User user;
 
-	public Boolean getStatus() {
-	return status;
+	public Boolean getAuthenticated() {
+	return authenticated;
 	}
 
-	public void setStatus(Boolean status) {
-	this.status = status;
+	public void setAuthenticated(Boolean authenticated) {
+	this.authenticated = authenticated;
 	}
 
-	public Data getData() {
-	return data;
+	public Oauth getOauth() {
+	return oauth;
 	}
 
-	public void setData(Data data) {
-	this.data = data;
+	public void setOauth(Oauth oauth) {
+	this.oauth = oauth;
 	}
 
+	public User getUser() {
+	return user;
+	}
+
+	public void setUser(User user) {
+	this.user = user;
+	}
+
+	
 }
