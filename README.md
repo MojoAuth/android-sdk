@@ -1,4 +1,13 @@
-# android-sdk
+<p align="center">
+  <a href="https://www.mojoauth.com">
+    <img alt="MojoAuth" src="https://mojoauth.com/assets/images/logo.svg" width="200" />
+  </a>
+</p>
+
+<h1 align="center">
+  Android SDK
+</h1>
+
 
 ## Prerequisites
 Android SDK Version >= 16
@@ -30,3 +39,13 @@ After creating a new Android project, follow the installation section of this do
 Add the following permissions to the AndroidManifest.xml:
 
 ```<uses-permission android:name="android.permission.INTERNET" />```
+
+## How to contribute
+
+We appreciate all kinds of contributions from anyone, be it finding an issue or writing a blog.
+
+Please check the [contributing guide](CONTRIBUTING.md) to become a contributor.
+
+## License
+
+For more information on licensing, please refer to [License](https://github.com/LoginRadius/engineering-portal/blob/master/LICENSE)
