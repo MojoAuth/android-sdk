@@ -12,7 +12,7 @@
 ## Prerequisites
 Android SDK Version >= 16
 
-Build Tools Version = 28.0.0 (changeable in build.gradle)
+Build Tools Version = 29.0.0 (changeable in build.gradle)
 
 Android Studio >= 3.4.1
 
@@ -23,7 +23,7 @@ To start Integrating MojoAuth using Android sdk, follow below mentioned steps:
 
 - For Gradle based installation, add the following dependency in your app’s build.gradle:
 
-  ```implementation 'com.mojoauth.android:mojoauth-sdk:1.1.0'```
+  ```implementation 'com.mojoauth.android:mojoauth-sdk:1.2.0'```
 
 ## Initialize SDK
 Before using the SDK, you must initialize the SDK with the help of following code:

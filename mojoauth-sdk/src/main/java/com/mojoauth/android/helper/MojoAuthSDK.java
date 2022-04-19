@@ -1,6 +1,18 @@
 package com.mojoauth.android.helper;
 
 
+import android.app.Activity;
+import android.content.Intent;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.Scope;
+import com.mojoauth.android.social.FacebookNativeActivity;
+import com.mojoauth.android.social.GoogleNativeActivity;
+
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,6 +39,67 @@ public class MojoAuthSDK {
 
 
 
+    }
+
+    public static class NativeLogin{
+        public static Intent intent;
+        private static Collection<String> facebookPermissions;
+        private static Scope[] googleScopes;
+        private static  String googleServerClientID,socialAppName;
+
+        public NativeLogin() {
+
+            this.googleScopes = new Scope[]{new Scope(Scopes.PROFILE),new Scope(Scopes.EMAIL)};
+            this.facebookPermissions = Arrays.asList("email");
+
+            if(!MojoAuthSDK.validate()){
+                throw new MojoAuthSDK.InitializeException();
+            }
+        }
+
+        public void setGoogleServerClientID(String googleServerClientID) {
+            NativeLogin.googleServerClientID = googleServerClientID;
+
+        }
+
+        public void setSocialAppName(String socialAppName){
+            NativeLogin.socialAppName =socialAppName;
+        }
+        public void setPermissions(@NonNull Collection<String> permissions) {
+            this.facebookPermissions = permissions;
+        }
+
+        private void startNativeLogin(Activity activity, int requestCode){
+            activity.startActivityForResult(intent,requestCode);
+        }
+        public void startFacebookNativeLogin(Activity activity, int requestCode){
+            intent = new Intent(activity, FacebookNativeActivity.class);
+           activity.startActivityForResult(intent,requestCode);
+           // activity.startActivity(intent);
+        }
+
+        public void startGoogleNativeLogin(Activity activity, int requestCode){
+            intent = new Intent(activity, GoogleNativeActivity.class);
+            activity.startActivityForResult(intent,requestCode);
+        }
+
+
+    }
+    public static Collection<String> getFaceBookPermissions() {
+        return NativeLogin.facebookPermissions;
+    }
+
+
+    public static String getGoogleServerClientID() {
+        return NativeLogin.googleServerClientID;
+    }
+
+    public static Scope[] getGoogleScopes() {
+        return NativeLogin.googleScopes;
+    }
+
+    public static String getSocialAppName() {
+        return NativeLogin.socialAppName;
     }
 
     public static boolean validate(){

@@ -39,7 +39,7 @@ public class MojoAuthApi {
      * @param email The email
      * @param handler The handler
      */
-    public void loginByMagicLink(String email, final AsyncHandler<LoginResponse> handler) {
+    public void loginByMagicLink(String email,String language,String redirect_url, final AsyncHandler<LoginResponse> handler) {
 
         Map<String, String> queryParameters = new HashMap<String, String>();
         JsonObject bodyParameters = new JsonObject(); //Required
@@ -49,6 +49,8 @@ public class MojoAuthApi {
 
             bodyParameters.addProperty("email", email);
         }
+        queryParameters.put("language", language);
+        queryParameters.put("redirect_url", redirect_url);
 
         MojoAuthRequest.execute("POST", resourcePath, queryParameters, gson.toJson(bodyParameters), new AsyncHandler<String>() {
 
@@ -71,7 +73,7 @@ public class MojoAuthApi {
      * @param email The email
      * @param handler The handler
      */
-    public void loginByEmailOTP(String email, final AsyncHandler<LoginResponse> handler) {
+    public void loginByEmailOTP(String email,String language, final AsyncHandler<LoginResponse> handler) {
 
         Map<String, String> queryParameters = new HashMap<String, String>();
         JsonObject bodyParameters = new JsonObject(); //Required
@@ -80,7 +82,9 @@ public class MojoAuthApi {
         if (!MojoAuthValidator.isNullOrWhiteSpace(email)) {
 
             bodyParameters.addProperty("email", email);
+
         }
+        queryParameters.put("language", language);
 
         MojoAuthRequest.execute("POST", resourcePath, queryParameters, gson.toJson(bodyParameters), new AsyncHandler<String>() {
 
@@ -198,9 +202,76 @@ public class MojoAuthApi {
         });
     }
 
+    /**
+     *
+     * @param phone The phone
+     * @param handler The handler
+     */
+    public void loginByPhone(String phone, final AsyncHandler<LoginResponse> handler) {
 
+        Map<String, String> queryParameters = new HashMap<String, String>();
+        JsonObject bodyParameters = new JsonObject(); //Required
+        String resourcePath = "users/phone";
 
+        if (!MojoAuthValidator.isNullOrWhiteSpace(phone)) {
 
+            bodyParameters.addProperty("phone", phone);
+        }
 
+        MojoAuthRequest.execute("POST", resourcePath, queryParameters, gson.toJson(bodyParameters), new AsyncHandler<String>() {
+
+            @Override
+            public void onSuccess(String response) {
+                TypeToken<LoginResponse> typeToken = new TypeToken<LoginResponse>() {
+                };
+                LoginResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
+                handler.onSuccess(successResponse);
+            }
+
+            @Override
+            public void onFailure(ErrorResponse errorResponse) {
+                handler.onFailure(errorResponse);
+            }
+        });
+    }
+
+    /**
+     *
+     * @param otp The otp
+     * @param stateId The id
+     * @param handler the handler
+     */
+    public void verifyPhoneOTP(String otp,String stateId,final AsyncHandler<UserResponse> handler) {
+
+        Map<String, String> queryParameters = new HashMap<String, String>();
+        JsonObject bodyParameters = new JsonObject(); //Required
+        String resourcePath = "users/phone/verify";
+
+        if (!MojoAuthValidator.isNullOrWhiteSpace(otp)) {
+
+            bodyParameters.addProperty("otp", otp);
+        }
+
+        if (!MojoAuthValidator.isNullOrWhiteSpace(stateId)) {
+
+            bodyParameters.addProperty("state_id", stateId);
+        }
+
+        MojoAuthRequest.execute("POST", resourcePath, queryParameters, gson.toJson(bodyParameters), new AsyncHandler<String>() {
+
+            @Override
+            public void onSuccess(String response) {
+                TypeToken<UserResponse> typeToken = new TypeToken<UserResponse>() {
+                };
+                UserResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
+                handler.onSuccess(successResponse);
+            }
+
+            @Override
+            public void onFailure(ErrorResponse errorResponse) {
+                handler.onFailure(errorResponse);
+            }
+        });
+    }
 
 }
