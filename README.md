@@ -23,7 +23,7 @@ To start Integrating MojoAuth using Android sdk, follow below mentioned steps:
 
 - For Gradle based installation, add the following dependency in your app’s build.gradle:
 
-  ```implementation 'com.mojoauth.android:mojoauth-sdk:1.2.0'```
+  ```implementation 'com.mojoauth.android:mojoauth-sdk:1.2.1'```
 
 ## Initialize SDK
 Before using the SDK, you must initialize the SDK with the help of following code:
