@@ -273,5 +273,67 @@ public class MojoAuthApi {
             }
         });
     }
+    
+    
+    /**
+     *
+     * @param accessToken The access token
+     * @param handler The handler
+     */
+    public void validateToken(String accessToken, final AsyncHandler<ValidateTokenResponse> handler) {
+
+        Map<String, String> queryParameters = new HashMap<String, String>();
+        String resourcePath = "token/verify";
+
+        if (!MojoAuthValidator.isNullOrWhiteSpace(accessToken)) {
+            queryParameters.put("access_token", accessToken);
+        }
+        MojoAuthRequest.execute("POST", resourcePath, queryParameters, null, new AsyncHandler<String>() {
+
+            @Override
+            public void onSuccess(String response) {
+                TypeToken<ValidateTokenResponse> typeToken = new TypeToken<ValidateTokenResponse>() {
+                };
+                ValidateTokenResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
+                handler.onSuccess(successResponse);
+            }
+
+            @Override
+            public void onFailure(ErrorResponse errorResponse) {
+                handler.onFailure(errorResponse);
+            }
+        });
+    }
+
+    /**
+     *
+     * @param refreshToken The refresh token
+     * @param handler The handler
+     */
+    public void refreshToken(String refreshToken, final AsyncHandler<UserResponse> handler) {
+        Map<String, String> queryParameters = new HashMap<String, String>();
+        JsonObject bodyParameters = new JsonObject(); //Required
+        String resourcePath = "token/refresh";
+
+        if (!MojoAuthValidator.isNullOrWhiteSpace(refreshToken)) {
+            bodyParameters.addProperty("refresh_token", refreshToken);
+        }
+        MojoAuthRequest.execute("POST", resourcePath, queryParameters, gson.toJson(bodyParameters), new AsyncHandler<String>() {
+
+            @Override
+            public void onSuccess(String response) {
+                TypeToken<UserResponse> typeToken = new TypeToken<UserResponse>() {
+
+                };
+                UserResponse successResponse = JsonDeserializer.deserializeJson(response, typeToken);
+                handler.onSuccess(successResponse);
+            }
+
+            @Override
+            public void onFailure(ErrorResponse errorResponse) {
+                handler.onFailure(errorResponse);
+            }
+        });
+    }
 
 }
