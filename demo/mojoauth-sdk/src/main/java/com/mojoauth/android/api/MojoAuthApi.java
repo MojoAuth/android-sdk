@@ -18,6 +18,7 @@ import com.mojoauth.android.helper.MojoAuthValidator;
 import com.mojoauth.android.models.responsemodels.JwksResponse;
 import com.mojoauth.android.models.responsemodels.LoginResponse;
 import com.mojoauth.android.models.responsemodels.UserResponse;
+import com.mojoauth.android.models.responsemodels.ValidateTokenResponse;
 import com.mojoauth.android.models.responsemodels.VerifyTokenResponse;
 
 import java.util.HashMap;
