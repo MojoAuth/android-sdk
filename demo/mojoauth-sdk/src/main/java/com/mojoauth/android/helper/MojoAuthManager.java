@@ -41,7 +41,7 @@ public class MojoAuthManager {
 	public static Boolean nativeLogin = false;
 	/** Callback function. SDK handles this variable. No need to modify. **/ 
 	public static AsyncHandler<UserResponse> asyncHandler;
-	/** LoginRadiusSDK api key. SDK handles this variable. No need to modify. **/
+	/** MojoAuth api key. SDK handles this variable. No need to modify. **/
 	protected static String AKey;
 	/** Image Url for getting the image icons of Providers **/
 	public static String ImageUrl;
@@ -58,7 +58,7 @@ public class MojoAuthManager {
 	/**
 	 * Base function to log in user. Ensure static 'asyncHandler' set first
 	 * @param activity Activity where the user will land after login process
-	 * @param provider    provider to be logged in with from providers list retrieved from loginradius server.
+	 * @param provider    provider to be logged in with from providers list retrieved from MojoAuth server.
 	 * @param asyncHandler    callback function
 	 */
 	public static void performLogin(final Activity activity, Provider provider, AsyncHandler<UserResponse> asyncHandler) {
