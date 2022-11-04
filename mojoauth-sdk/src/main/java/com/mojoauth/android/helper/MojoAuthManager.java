@@ -169,7 +169,7 @@ public class MojoAuthManager {
 
 
 	/**
-	 * Send Facebook token to LR server
+	 * Send Facebook token to MojoAuth server
 	 * @param fbToken Token from facebook
 	 * @param handler callback handler
 	 */
@@ -181,7 +181,7 @@ public class MojoAuthManager {
 		providerHandler("users/social/facebook", params, handler);
 	}
 	/**
-	 * Send Google token to LR server
+	 * Send Google token to MojoAuth server
 	 * @param googleToken Token from google
 	 * @param handler callback handler
 	 */
