@@ -169,19 +169,19 @@ public class MojoAuthManager {
 
 
 	/**
-	 * Send Facebook token to LR server
+	 * Send Facebook token to MojoAuth server
 	 * @param fbToken Token from facebook
 	 * @param handler callback handler
 	 */
 	public static void getResponseFb(String fbToken, final AsyncHandler<UserResponse> handler)
 	{
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("key",AKey);
+		params.put("api_key",AKey);
 		params.put("fb_access_token",fbToken);
 		providerHandler("users/social/facebook", params, handler);
 	}
 	/**
-	 * Send Google token to LR server
+	 * Send Google token to MojoAuth server
 	 * @param googleToken Token from google
 	 * @param handler callback handler
 	 */
