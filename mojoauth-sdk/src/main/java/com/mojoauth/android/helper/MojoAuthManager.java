@@ -176,7 +176,7 @@ public class MojoAuthManager {
 	public static void getResponseFb(String fbToken, final AsyncHandler<UserResponse> handler)
 	{
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("key",AKey);
+		params.put("api_key",AKey);
 		params.put("fb_access_token",fbToken);
 		providerHandler("users/social/facebook", params, handler);
 	}
