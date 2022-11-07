@@ -1,7 +1,7 @@
 /*
  *
  * Created by MojoAuth Development Team
-   Copyright 2022 MojoAuth.io All rights reserved.
+   Copyright 2022 MojoAuth All rights reserved.
 */
 
 package com.mojoauth.android.handler;

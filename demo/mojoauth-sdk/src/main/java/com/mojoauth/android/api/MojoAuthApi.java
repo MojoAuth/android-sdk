@@ -2,7 +2,7 @@ package com.mojoauth.android.api;
 /*
  *
  * Created by MojoAuth Development Team
-   Copyright 2022 MojoAuth.io All rights reserved.
+   Copyright 2022 MojoAuth All rights reserved.
 
  */
 
