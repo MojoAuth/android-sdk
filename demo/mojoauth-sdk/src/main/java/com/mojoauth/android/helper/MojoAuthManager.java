@@ -41,7 +41,7 @@ public class MojoAuthManager {
 	public static Boolean nativeLogin = false;
 	/** Callback function. SDK handles this variable. No need to modify. **/ 
 	public static AsyncHandler<UserResponse> asyncHandler;
-	/** LoginRadiusSDK api key. SDK handles this variable. No need to modify. **/
+	/** MojoAuth api key. SDK handles this variable. No need to modify. **/
 	protected static String AKey;
 	/** Image Url for getting the image icons of Providers **/
 	public static String ImageUrl;
@@ -58,7 +58,7 @@ public class MojoAuthManager {
 	/**
 	 * Base function to log in user. Ensure static 'asyncHandler' set first
 	 * @param activity Activity where the user will land after login process
-	 * @param provider    provider to be logged in with from providers list retrieved from loginradius server.
+	 * @param provider    provider to be logged in with from providers list retrieved from MojoAuth server.
 	 * @param asyncHandler    callback function
 	 */
 	public static void performLogin(final Activity activity, Provider provider, AsyncHandler<UserResponse> asyncHandler) {
@@ -169,19 +169,19 @@ public class MojoAuthManager {
 
 
 	/**
-	 * Send Facebook token to LR server
+	 * Send Facebook token to MojoAuth server
 	 * @param fbToken Token from facebook
 	 * @param handler callback handler
 	 */
 	public static void getResponseFb(String fbToken, final AsyncHandler<UserResponse> handler)
 	{
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("key",AKey);
+		params.put("api_key",AKey);
 		params.put("fb_access_token",fbToken);
 		providerHandler("users/social/facebook", params, handler);
 	}
 	/**
-	 * Send Google token to LR server
+	 * Send Google token to MojoAuth server
 	 * @param googleToken Token from google
 	 * @param handler callback handler
 	 */

@@ -1,7 +1,7 @@
 /* 
  * 
- * Created by LoginRadius Development Team
-   Copyright 2019 LoginRadius Inc. All rights reserved.
+ * Created by MojoAuth Development Team
+   Copyright 2022 MojoAuth All rights reserved.
    
  */
 

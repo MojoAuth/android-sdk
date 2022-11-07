@@ -1,7 +1,7 @@
 /* 
  * 
  * Created by MojoAuth Development Team
-   Copyright 2020 MojoAuth Inc. All rights reserved.
+   Copyright 2022 MojoAuth All rights reserved.
    
  */
 
