@@ -35,7 +35,7 @@ public class ExceptionResponse {
             obj.setMessage("IOException");
 
         } else {
-            obj.setDescription("Unknown Error");
+            obj.setDescription(error.toString());
             obj.setCode(106);
             obj.setMessage("UnknownError");
 
